@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+:root {
+  --primary-color: #a3b2bf;
+  --secondary-color: #c5d0d9;
+  --tertiary-color: #ebeff2;
+  --quaternary-color: #595959;
+  --dark-color: #0d0d0d;
+
+  --font-family: "Stacked Sans", sans-serif;
+
+  --title-xlg: 900 2.5rem var(--font-family);
+}
+
