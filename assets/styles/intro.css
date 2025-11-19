@@ -96,12 +96,15 @@ body.intro-hidden {
 .word.dim {
   color: #333;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-/* Estado ativo (quando passou o mouse) */
+/* Estado ativo (quando passou o mouse OU tocou) */
 .word.dim.active {
-  color: #fff;
+  color: rgb(211, 94, 94);
   font-weight: 700;
+  transition: all 0.2s ease;
 }
 
 /* Palavras destacadas */

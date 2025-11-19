@@ -69,8 +69,29 @@ function generateWords(lang) {
             span.textContent = randomWord + '.';
             span.classList.add('dim');
             
+            // Desktop: mouseenter
             span.addEventListener('mouseenter', function() {
                 this.classList.add('active');
+            });
+            
+            // Mobile: touchstart com toggle inteligente
+            span.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                
+                // Remove 'active' de todas as outras palavras
+                document.querySelectorAll('.word.dim.active').forEach(word => {
+                    if (word !== this) {
+                        word.classList.remove('active');
+                    }
+                });
+                
+                // Toggle na palavra atual
+                this.classList.toggle('active');
+            }, { passive: false });
+            
+            // Fallback para click (funciona em ambos)
+            span.addEventListener('click', function() {
+                this.classList.toggle('active');
             });
         }
         
