@@ -6,6 +6,9 @@ const langOptions = document.querySelectorAll(".lang-option");
 // Idioma atual
 let currentLang = "pt";
 
+// Controle de toque para mobile
+let isTouching = false;
+
 // Palavras do tema em PT-BR
 const dimWordsPT = [
   "código",
@@ -142,6 +145,17 @@ function detectLanguage() {
   return browserLang.toLowerCase().startsWith("pt") ? "pt" : "en";
 }
 
+// Ativa palavra (adiciona highlight permanentemente)
+function activateWord(element) {
+  if (
+    element &&
+    element.classList.contains("dim") &&
+    !element.classList.contains("active")
+  ) {
+    element.classList.add("active");
+  }
+}
+
 // Gera palavras aleatórias
 function generateWords(lang) {
   wordsGrid.innerHTML = ""; // Limpa grid
@@ -165,36 +179,53 @@ function generateWords(lang) {
       span.textContent = randomWord + ".";
       span.classList.add("dim");
 
-      // Desktop: mouseenter
+      // Desktop: mouseenter (hover)
       span.addEventListener("mouseenter", function () {
         this.classList.add("active");
       });
 
-      // Mobile: touchstart com toggle inteligente
+      // Mobile: touchstart (toque inicial)
       span.addEventListener(
         "touchstart",
         function (e) {
-          e.preventDefault(); // Previne comportamento padrão
-          e.stopPropagation(); // IMPORTANTE: impede propagação para a intro
-
-          // Remove 'active' de todas as outras palavras
-          document.querySelectorAll(".word.dim.active").forEach((word) => {
-            if (word !== this) {
-              word.classList.remove("active");
-            }
-          });
-
-          // Toggle na palavra atual
-          this.classList.toggle("active");
+          e.preventDefault();
+          e.stopPropagation();
+          isTouching = true;
+          activateWord(this);
         },
         { passive: false }
       );
 
-      // Click (funciona em ambos, mas só se touchstart não disparou)
-      span.addEventListener("click", function (e) {
-        e.stopPropagation(); // IMPORTANTE: impede propagação para a intro
-        this.classList.toggle("active");
-      });
+      // Mobile: touchmove (arrastar o dedo)
+      span.addEventListener(
+        "touchmove",
+        function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (isTouching) {
+            // Detecta elemento sob o dedo durante o arrasto
+            const touch = e.touches[0];
+            const elementUnderFinger = document.elementFromPoint(
+              touch.clientX,
+              touch.clientY
+            );
+            activateWord(elementUnderFinger);
+          }
+        },
+        { passive: false }
+      );
+
+      // Mobile: touchend (soltar o dedo)
+      span.addEventListener(
+        "touchend",
+        function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          isTouching = false;
+        },
+        { passive: false }
+      );
     }
 
     wordsGrid.appendChild(span);
@@ -237,9 +268,10 @@ langOptions.forEach((option) => {
 // Eventos gerais
 document.addEventListener("keydown", hideIntro, { once: true });
 
-// ALTERAÇÃO CRÍTICA: Removido o touchstart da intro
-// Agora só fecha no clique das palavras highlight ou após timeout
-// intro.addEventListener('touchstart', hideIntro, { once: true }); // REMOVIDO
+// Listener global para touchend (garante que isTouching seja resetado)
+document.addEventListener("touchend", function () {
+  isTouching = false;
+});
 
 // Inicializa
 currentLang = detectLanguage();
