@@ -1,0 +1,265 @@
+/* Reset específico do main */
+.portfolio {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Fixa */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background: #000;
+  border-right: 1px solid #222;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+/* Foto */
+.sidebar-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid #333;
+  overflow: hidden;
+}
+
+.sidebar-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.sidebar-photo:hover img {
+  filter: grayscale(0%);
+}
+
+/* Info */
+.sidebar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  color: #666;
+  letter-spacing: 0.05em;
+}
+
+/* Social Links */
+.sidebar-social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #222;
+}
+
+.social-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #666;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #fff;
+}
+
+.social-arrow {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-link:hover .social-arrow {
+  opacity: 1;
+}
+
+/* CV Button */
+.sidebar-cv {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: 1px solid #333;
+  color: #666;
+  text-decoration: none;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.sidebar-cv:hover {
+  border-color: #fff;
+  color: #fff;
+  background: #111;
+}
+
+/* Conteúdo Principal */
+.content {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  padding: 3rem;
+  max-width: 1200px;
+}
+
+/* Seções */
+.section {
+  margin-bottom: 5rem;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #ccc;
+  letter-spacing: 0.02em;
+}
+
+/* Grid de Projetos */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Card de Projeto */
+.project-card {
+  padding: 2rem;
+  border: 1px solid #222;
+  transition: border-color 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: #444;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.project-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.project-year {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0.1em;
+}
+
+.project-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #999;
+  margin-bottom: 1.5rem;
+}
+
+/* Tags */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  font-size: 10px;
+  color: #666;
+  border: 1px solid #333;
+  padding: 0.25rem 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Link do Projeto */
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.project-link:hover {
+  color: #fff;
+}
+
+.project-arrow {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-link:hover .project-arrow {
+  opacity: 1;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #222;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .portfolio {
+    flex-direction: column;
+  }
+}
+
+/* Desktop - Grid 2 colunas */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
