@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rodrigo Vanini</title>
+    <title>Rodrigo Vanini - Dev Portfolio</title>
     <link rel="stylesheet" href="./assets/styles/intro.css" />
+    <link rel="stylesheet" href="./assets/styles/main.css" />
   </head>
   <body>
     <!-- Seletor de idioma -->
@@ -21,10 +22,520 @@
 
     <!-- Portfolio -->
     <main class="portfolio">
-      <section class="hero">
-        <h2>Rodrigo Vanini</h2>
-        <p>•Dev Design • Código</p>
-      </section>
+      <!-- Sidebar Fixa -->
+      <aside class="sidebar">
+        <!-- Foto -->
+        <div class="sidebar-photo">
+          <img src="./assets/images/profile_image.png" alt="Rodrigo Vanini" />
+        </div>
+
+        <!-- Info -->
+        <div class="sidebar-info">
+          <h1 class="sidebar-name">RODRIGO VANINI</h1>
+          <p class="sidebar-title" data-translate="role">
+            Desenvolvedor Full Stack
+          </p>
+        </div>
+
+        <!-- Contatos -->
+        <div class="sidebar-social">
+          <a
+            href="https://wa.me/5516992753195"
+            class="social-link"
+            target="_blank"
+          >
+            <span>WhatsApp</span>
+            <span class="social-arrow">→</span>
+          </a>
+          <a href="mailto:erodrigov7@gmail.com" class="social-link">
+            <span>Email</span>
+            <span class="social-arrow">→</span>
+          </a>
+          <a
+            href="https://github.com/eRodrigoVanini"
+            class="social-link"
+            target="_blank"
+          >
+            <span>GitHub</span>
+            <span class="social-arrow">→</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/erodrigovanini"
+            class="social-link"
+            target="_blank"
+          >
+            <span>LinkedIn</span>
+            <span class="social-arrow">→</span>
+          </a>
+        </div>
+
+        <!-- CV Button -->
+        <a
+          href="https://erodrigovanini.github.io/curriculo.rodrigovanini/"
+          class="sidebar-cv"
+          target="_blank"
+          data-translate="cv"
+        >
+          Ver Currículo Completo
+        </a>
+      </aside>
+
+      <!-- Conteúdo Principal -->
+      <div class="content">
+        <!-- Sobre Mim -->
+        <section class="section" id="about">
+          <h2 class="section-title" data-translate="about-title">Sobre Mim</h2>
+          <div class="section-content">
+            <p data-translate="about-p1">
+              Olá! Sou Rodrigo Vanini, desenvolvedor full stack apaixonado por
+              criar experiências digitais únicas e funcionais. Com formação em
+              Análise e Desenvolvimento de Sistemas, combino design minimalista
+              com código limpo e eficiente.
+            </p>
+            <p data-translate="about-p2">
+              Minha jornada na programação começou com curiosidade e se
+              transformou em dedicação diária para aprender, evoluir e construir
+              soluções que fazem diferença. Acredito que a tecnologia deve ser
+              humana, acessível e elegante.
+            </p>
+            <p data-translate="about-p3">
+              Atualmente, trabalho com desenvolvimento web moderno, explorando
+              desde interfaces interativas até sistemas robustos no backend.
+              Sempre em busca de novos desafios e oportunidades de crescimento.
+            </p>
+          </div>
+        </section>
+
+        <!-- Tecnologias -->
+        <section class="section" id="skills">
+          <h2 class="section-title" data-translate="skills-title">
+            Tecnologias
+          </h2>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">HTML/CSS</span>
+                <span class="skill-level" data-translate="advanced"
+                  >Avançado</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">JavaScript</span>
+                <span class="skill-level" data-translate="advanced"
+                  >Avançado</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">React</span>
+                <span class="skill-level" data-translate="beginner"
+                  >Iniciante</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 40%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Node.js</span>
+                <span class="skill-level" data-translate="beginner"
+                  >Iniciante</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 45%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Python</span>
+                <span class="skill-level" data-translate="intermediate"
+                  >Intermediário</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 65%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Git/GitHub</span>
+                <span class="skill-level" data-translate="advanced"
+                  >Avançado</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">SQL</span>
+                <span class="skill-level" data-translate="intermediate"
+                  >Intermediário</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Responsive Design</span>
+                <span class="skill-level" data-translate="advanced"
+                  >Avançado</span
+                >
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projetos -->
+        <section class="section" id="projects">
+          <h2 class="section-title" data-translate="projects-title">
+            Projetos em Destaque
+          </h2>
+          <div class="projects-grid">
+            <!-- Projeto 1 - Prompts Manager -->
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="./assets/images/(1)prompts_preview.png"
+                  alt="Prompts Manager"
+                />
+              </div>
+              <div class="project-header">
+                <h3 class="project-title">Prompts Manager</h3>
+                <span class="project-year">2025</span>
+              </div>
+              <p class="project-description" data-translate="project1-desc">
+                Aplicação web prática e intuitiva que permite organizar todos os
+                seus prompts de IA em um único lugar.
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">LocalStorage</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://erodrigovanini.github.io/prompts-manager/"
+                  class="project-link project-link-demo"
+                  target="_blank"
+                >
+                  <span data-translate="view-demo">Ver demo</span>
+                  <span class="project-arrow">↗</span>
+                </a>
+                <a
+                  href="https://github.com/eRodrigoVanini/prompts-manager"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <span data-translate="view-code">Ver código</span>
+                  <span class="project-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Projeto 2 - Classroom Game -->
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="./assets/images/(2)classr_preview_00.png"
+                  alt="Classroom Guessing Game"
+                />
+              </div>
+              <div class="project-header">
+                <h3 class="project-title">Classroom Game</h3>
+                <span class="project-year">2024</span>
+              </div>
+              <p class="project-description" data-translate="project2-desc">
+                Jogo de adivinhação educativo desenvolvido com React.js, ideal
+                para sala de aula e aprendizado interativo.
+              </p>
+              <div class="project-tags">
+                <span class="tag">React.js</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">CSS</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://erodrigovanini.github.io/classroom/"
+                  class="project-link project-link-demo"
+                  target="_blank"
+                >
+                  <span data-translate="view-demo">Ver demo</span>
+                  <span class="project-arrow">↗</span>
+                </a>
+                <a
+                  href="https://github.com/eRodrigoVanini/classroom"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <span data-translate="view-code">Ver código</span>
+                  <span class="project-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Projeto 3 - Currency Converter -->
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="./assets/images/(3)convert_preview.png"
+                  alt="Currency Converter"
+                />
+              </div>
+              <div class="project-header">
+                <h3 class="project-title">Currency Converter</h3>
+                <span class="project-year">2024</span>
+              </div>
+              <p class="project-description" data-translate="project3-desc">
+                Conversor de moedas moderno que converte Real (BRL) para USD,
+                EUR e GBP. Desenvolvido com JavaScript vanilla.
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">API</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://erodrigovanini.github.io/convert-template/"
+                  class="project-link project-link-demo"
+                  target="_blank"
+                >
+                  <span data-translate="view-demo">Ver demo</span>
+                  <span class="project-arrow">↗</span>
+                </a>
+                <a
+                  href="https://github.com/eRodrigoVanini/convert-template"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <span data-translate="view-code">Ver código</span>
+                  <span class="project-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Projeto 4 - Grocery List -->
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="./assets/images/(4)grossery_preview.png"
+                  alt="Grocery List"
+                />
+              </div>
+              <div class="project-header">
+                <h3 class="project-title">Grocery List</h3>
+                <span class="project-year">2024</span>
+              </div>
+              <p class="project-description" data-translate="project4-desc">
+                Aplicação simples para gerenciar sua lista de compras semanal.
+                Adicione, marque como completo e remova itens facilmente.
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">UI/UX</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://erodrigovanini.github.io/grosseryList/"
+                  class="project-link project-link-demo"
+                  target="_blank"
+                >
+                  <span data-translate="view-demo">Ver demo</span>
+                  <span class="project-arrow">↗</span>
+                </a>
+                <a
+                  href="https://github.com/eRodrigoVanini/grosseryList"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <span data-translate="view-code">Ver código</span>
+                  <span class="project-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Projeto 5 - BMI Calculator -->
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="./assets/images/(5)bmi_preview.png"
+                  alt="BMI Calculator"
+                />
+              </div>
+              <div class="project-header">
+                <h3 class="project-title">BMI Calculator</h3>
+                <span class="project-year">2024</span>
+              </div>
+              <p class="project-description" data-translate="project5-desc">
+                Calculadora de IMC simples com exibição de resultado. Utiliza
+                CSS e JavaScript para interface interativa.
+              </p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">CSS</span>
+                <span class="tag">HTML</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://erodrigovanini.github.io/bmi-calculator/"
+                  class="project-link project-link-demo"
+                  target="_blank"
+                >
+                  <span data-translate="view-demo">Ver demo</span>
+                  <span class="project-arrow">↗</span>
+                </a>
+                <a
+                  href="https://github.com/eRodrigoVanini/bmi-calculator"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <span data-translate="view-code">Ver código</span>
+                  <span class="project-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Projeto 6 - Social Links -->
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="./assets/images/(6)social-links_preview.png"
+                  alt="Social Links Page"
+                />
+              </div>
+              <div class="project-header">
+                <h3 class="project-title">Social Links Page</h3>
+                <span class="project-year">2023</span>
+              </div>
+              <p class="project-description" data-translate="project6-desc">
+                Agregador de links para usar como cartão de visita online.
+                Design minimalista e responsivo.
+              </p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Responsive</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="https://erodrigovanini.github.io/social-links-page/"
+                  class="project-link project-link-demo"
+                  target="_blank"
+                >
+                  <span data-translate="view-demo">Ver demo</span>
+                  <span class="project-arrow">↗</span>
+                </a>
+                <a
+                  href="https://github.com/eRodrigoVanini/social-links-page"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <span data-translate="view-code">Ver código</span>
+                  <span class="project-arrow">→</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Link para GitHub -->
+          <div class="github-cta">
+            <a
+              href="https://github.com/eRodrigoVanini"
+              class="github-link"
+              target="_blank"
+            >
+              <span data-translate="more-projects"
+                >Ver todos os projetos no GitHub</span
+              >
+              <span class="github-arrow">→</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Contato -->
+        <section class="section" id="contact">
+          <h2 class="section-title" data-translate="contact-title">
+            Vamos Conversar?
+          </h2>
+          <div class="contact-content">
+            <p data-translate="contact-text">
+              Estou sempre aberto a novos projetos, colaborações e
+              oportunidades. Se você tem uma ideia ou apenas quer trocar uma
+              ideia, não hesite em entrar em contato!
+            </p>
+            <div class="contact-grid">
+              <a href="mailto:erodrigov7@gmail.com" class="contact-card">
+                <span class="contact-icon">✉</span>
+                <span class="contact-label">Email</span>
+                <span class="contact-value">erodrigov7@gmail.com</span>
+              </a>
+              <a
+                href="https://wa.me/5516992753195"
+                class="contact-card"
+                target="_blank"
+              >
+                <span class="contact-icon">📱</span>
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value">+55 16 99275-3195</span>
+              </a>
+              <a
+                href="https://github.com/eRodrigoVanini"
+                class="contact-card"
+                target="_blank"
+              >
+                <span class="contact-icon">💻</span>
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value">@eRodrigoVanini</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/erodrigovanini"
+                class="contact-card"
+                target="_blank"
+              >
+                <span class="contact-icon">🔗</span>
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">erodrigovanini</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <p data-translate="footer-text">
+            © 2025 Rodrigo Vanini. Desenvolvido com código, café e determinação.
+          </p>
+        </footer>
+      </div>
     </main>
 
     <script src="script.js"></script>

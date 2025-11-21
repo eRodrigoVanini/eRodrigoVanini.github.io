@@ -139,6 +139,82 @@ const highlightWords = {
   en: ["PORTFOLIO", "2025", "RODRIGO", "VANINI", "ENTER"],
 };
 
+// Traduções
+const translations = {
+  pt: {
+    role: "Desenvolvedor Full Stack",
+    cv: "Ver Currículo Completo",
+    "about-title": "Sobre Mim",
+    "about-p1":
+      "Olá! Sou Rodrigo Vanini, desenvolvedor full stack apaixonado por criar experiências digitais únicas e funcionais. Com formação em Análise e Desenvolvimento de Sistemas, combino design minimalista com código limpo e eficiente.",
+    "about-p2":
+      "Minha jornada na programação começou com curiosidade e se transformou em dedicação diária para aprender, evoluir e construir soluções que fazem diferença. Acredito que a tecnologia deve ser humana, acessível e elegante.",
+    "about-p3":
+      "Atualmente, trabalho com desenvolvimento web moderno, explorando desde interfaces interativas até sistemas robustos no backend. Sempre em busca de novos desafios e oportunidades de crescimento.",
+    "skills-title": "Tecnologias",
+    advanced: "Avançado",
+    intermediate: "Intermediário",
+    beginner: "Iniciante",
+    "projects-title": "Projetos em Destaque",
+    "project1-desc":
+      "Aplicação web prática e intuitiva que permite organizar todos os seus prompts de IA em um único lugar.",
+    "project2-desc":
+      "Jogo de adivinhação educativo desenvolvido com React.js, ideal para sala de aula e aprendizado interativo.",
+    "project3-desc":
+      "Conversor de moedas moderno que converte Real (BRL) para USD, EUR e GBP. Desenvolvido com JavaScript vanilla.",
+    "project4-desc":
+      "Aplicação simples para gerenciar sua lista de compras semanal. Adicione, marque como completo e remova itens facilmente.",
+    "project5-desc":
+      "Calculadora de IMC simples com exibição de resultado. Utiliza CSS e JavaScript para interface interativa.",
+    "project6-desc":
+      "Agregador de links para usar como cartão de visita online. Design minimalista e responsivo.",
+    "view-demo": "Ver demo",
+    "view-code": "Ver código",
+    "more-projects": "Ver todos os projetos no GitHub",
+    "contact-title": "Vamos Conversar?",
+    "contact-text":
+      "Estou sempre aberto a novos projetos, colaborações e oportunidades. Se você tem uma ideia ou apenas quer trocar uma ideia, não hesite em entrar em contato!",
+    "footer-text":
+      "© 2025 Rodrigo Vanini. Desenvolvido com código, café e determinação.",
+  },
+  en: {
+    role: "Full Stack Developer",
+    cv: "View Full Resume",
+    "about-title": "About Me",
+    "about-p1":
+      "Hello! I'm Rodrigo Vanini, a full stack developer passionate about creating unique and functional digital experiences. With a degree in Systems Analysis and Development, I combine minimalist design with clean and efficient code.",
+    "about-p2":
+      "My journey in programming started with curiosity and has become a daily dedication to learn, evolve, and build solutions that make a difference. I believe technology should be human, accessible, and elegant.",
+    "about-p3":
+      "Currently, I work with modern web development, exploring everything from interactive interfaces to robust backend systems. Always seeking new challenges and growth opportunities.",
+    "skills-title": "Technologies",
+    advanced: "Advanced",
+    intermediate: "Intermediate",
+    beginner: "Beginner",
+    "projects-title": "Featured Projects",
+    "project1-desc":
+      "A practical and intuitive web application that allows you to organize all your AI prompts in one place.",
+    "project2-desc":
+      "Educational guessing game developed with React.js, ideal for classroom and interactive learning.",
+    "project3-desc":
+      "Modern currency converter that converts Brazilian Real (BRL) to USD, EUR, and GBP. Built with vanilla JavaScript.",
+    "project4-desc":
+      "Simple application for managing your weekly shopping list. Add, mark as complete, and remove items easily.",
+    "project5-desc":
+      "Simple BMI calculator with result display. Uses CSS and JavaScript for interactive interface.",
+    "project6-desc":
+      "Link aggregator to use as an online business card. Minimalist and responsive design.",
+    "view-demo": "View demo",
+    "view-code": "View code",
+    "more-projects": "See all projects on GitHub",
+    "contact-title": "Let's Talk?",
+    "contact-text":
+      "I'm always open to new projects, collaborations, and opportunities. If you have an idea or just want to chat, don't hesitate to get in touch!",
+    "footer-text":
+      "© 2025 Rodrigo Vanini. Built with code, coffee, and determination.",
+  },
+};
+
 // Detecta idioma do navegador
 function detectLanguage() {
   const browserLang = navigator.language || navigator.userLanguage;
@@ -232,6 +308,17 @@ function generateWords(lang) {
   }
 }
 
+// Atualiza traduções da página
+function updateTranslations(lang) {
+  const elements = document.querySelectorAll("[data-translate]");
+  elements.forEach((element) => {
+    const key = element.getAttribute("data-translate");
+    if (translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+  });
+}
+
 // Troca idioma
 function switchLanguage(lang) {
   currentLang = lang;
@@ -246,6 +333,9 @@ function switchLanguage(lang) {
 
   // Regenera palavras
   generateWords(lang);
+
+  // Atualiza traduções do conteúdo
+  updateTranslations(lang);
 }
 
 // Remove a intro
