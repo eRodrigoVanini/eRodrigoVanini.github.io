@@ -1,3 +1,6 @@
+/* ========================= intro.css ========================= */
+/* Minimalist, conceptual, poetic — refined version */
+
 /* Reset */
 * {
   margin: 0;
@@ -16,7 +19,7 @@ body.intro-hidden {
   overflow: auto;
 }
 
-/* Seletor de idioma */
+/* Lang selector */
 .lang-selector {
   position: fixed;
   top: 1.5rem;
@@ -32,35 +35,29 @@ body.intro-hidden {
 .lang-option {
   color: #333;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
-
 .lang-option:hover {
   color: #666;
 }
-
 .lang-option.active {
   color: #fff;
   font-weight: 700;
 }
-
 .lang-divider {
   color: #333;
 }
 
-/* Intro */
+/* Intro container */
 .intro {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   background: #000;
   z-index: 999;
-  transition: opacity 0.8s;
+  transition: opacity 0.5s ease;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
 }
 
 .intro.fade-out {
@@ -68,79 +65,91 @@ body.intro-hidden {
   pointer-events: none;
 }
 
-/* GRID com overflow das dimWords (mantido) */
+/* GRID: mantemos overflow das dimWords (caos controlado) */
 .words-grid {
-  width: calc(100vw + 20rem); /* mantém dimWords ultrapassando tela */
+  width: calc(100vw + 20rem);
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
   align-content: flex-start;
-  gap: 0.5rem 0.5rem;
+  gap: 0.6rem 0.8rem;
   line-height: 1;
   padding: 0 2rem;
   overflow: visible;
   position: absolute;
   top: 0;
-  left: -2rem; /* necessário para efeito de overflow */
+  left: -2rem;
 }
 
-/* Palavras (padrão) */
+/* Palavra padrão (dim) */
 .word {
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: clamp(12px, 1.6vw, 18px);
   font-weight: 400;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   opacity: 0;
-  animation: fadeIn 4s forwards;
-  transition: all 0.3s ease;
-  white-space: nowrap; /* dimWords podem ser cortadas */
+  transition: color 0.18s ease, opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
   flex-shrink: 0;
+  color: #242424;
 }
 
-/* dimWords */
+/* dimWords interativas */
 .word.dim {
-  color: #333;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
-
 .word.dim.active {
   color: rgb(211, 94, 94);
   font-weight: 700;
-  transition: all 0.2s ease;
 }
 
-/* Bloco de highlights — wrapper */
+/* highlight block wrapper */
 .highlight-block {
   display: inline-flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   align-items: baseline;
-  flex-wrap: wrap; /* se necessário quebra interna do bloco */
-  /* proteção para não sair do viewport mesmo com grid deslocado */
+  flex-wrap: wrap;
   max-width: calc(100vw - 6rem);
   z-index: 20;
-  /* evitar que o bloco seja encolhido demais */
   flex-shrink: 0;
+  padding: 0.2rem;
 }
 
-/* Palavras destacadas individuais */
+/* Palavras destacadas */
 .word.highlight {
   color: #fff;
   font-weight: 700;
-  white-space: normal !important; /* permite quebra */
+  white-space: normal !important;
   word-break: break-word;
   overflow-wrap: anywhere;
-  /* permitir que a palavra quebre em várias linhas caso seja longa */
   display: inline-block;
   max-width: 100%;
+  transform-origin: center;
+  opacity: 0;
 }
 
-/* hover */
-.word.highlight:hover {
-  color: #ddd;
-  cursor: pointer;
+/* leve presença poética */
+@keyframes highlight-breath {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.highlight-block.breathed {
+  animation: highlight-breath 6s ease-in-out infinite;
+}
+
+.fade-in {
+  opacity: 1 !important;
 }
 
 @keyframes fadeIn {
@@ -153,45 +162,30 @@ body.intro-hidden {
 .portfolio {
   min-height: 100vh;
   opacity: 0;
-  transition: opacity 0.8s;
+  transition: opacity 0.5s;
 }
-
 body.intro-hidden .portfolio {
   opacity: 1;
 }
 
-/* Responsividade */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .words-grid {
-    width: calc(100vw + 15rem);
-    left: -1.5rem;
-    padding: 0 1.5rem;
-    gap: 0.6rem 0.6rem;
-  }
-
-  .word {
-    font-size: clamp(16px, 2.2vw, 20px);
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .highlight-block.breathed {
+    animation: none;
   }
 }
 
+/* Responsividade */
 @media (max-width: 767px) {
-  .lang-selector {
-    top: 1rem;
-    right: 1rem;
-    font-size: 9px;
-  }
-
   .words-grid {
     width: calc(100vw + 10rem);
     left: -1rem;
     padding: 0 1rem;
-    gap: 0.4rem 0.4rem;
+    gap: 0.45rem 0.6rem;
   }
-
   .word {
-    font-size: clamp(12px, 3vw, 16px);
+    font-size: clamp(11px, 3vw, 16px);
   }
-
   .highlight-block {
     max-width: calc(100vw - 3rem);
   }
@@ -202,28 +196,13 @@ body.intro-hidden .portfolio {
     width: calc(100vw + 8rem);
     left: -0.75rem;
     padding: 0 0.75rem;
-    gap: 0.3rem 0.3rem;
+    gap: 0.35rem 0.45rem;
   }
-
   .word {
     font-size: clamp(10px, 3.5vw, 14px);
   }
-
   .highlight-block {
     max-width: calc(100vw - 2rem);
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .words-grid {
-    width: calc(100vw + 18rem);
-    left: -1.75rem;
-    padding: 0 1.75rem;
-    gap: 0.65rem 0.65rem;
-  }
-
-  .word {
-    font-size: clamp(15px, 2vw, 19px);
   }
 }
 
@@ -232,36 +211,6 @@ body.intro-hidden .portfolio {
     width: calc(100vw + 25rem);
     left: -2.5rem;
     padding: 0 2.5rem;
-    gap: 0.7rem 0.7rem;
-  }
-
-  .word {
-    font-size: clamp(16px, 1.8vw, 20px);
-  }
-}
-
-@media (min-width: 1440px) {
-  .words-grid {
-    width: calc(100vw + 30rem);
-    left: -3rem;
-    padding: 0 3rem;
-    gap: 0.75rem 0.75rem;
-  }
-
-  .word {
-    font-size: clamp(17px, 1.7vw, 21px);
-  }
-}
-
-@media (min-width: 1920px) {
-  .words-grid {
-    width: calc(100vw + 40rem);
-    left: -4rem;
-    padding: 0 4rem;
-    gap: 0.8rem 0.8rem;
-  }
-
-  .word {
-    font-size: clamp(18px, 1.6vw, 22px);
+    gap: 0.7rem 0.8rem;
   }
 }
