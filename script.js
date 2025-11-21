@@ -215,6 +215,58 @@ const translations = {
   },
 };
 
+// Calcula quantidade de palavras baseado no tamanho da tela
+function calculateTotalWords() {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 375) {
+    return 200; // Mobile muito pequeno
+  } else if (screenWidth <= 767) {
+    return 280; // Mobile
+  } else if (screenWidth <= 1024) {
+    return 350; // Tablet
+  } else if (screenWidth <= 1279) {
+    return 400; // Desktop médio
+  } else if (screenWidth <= 1439) {
+    return 480; // Desktop grande (1280px)
+  } else if (screenWidth <= 1919) {
+    return 550; // Desktop extra grande
+  } else {
+    return 650; // Ultra wide
+  }
+}
+
+// Calcula posição segura para highlights (área visível da tela)
+function calculateSafeHighlightPosition(totalWords) {
+  const screenWidth = window.innerWidth;
+
+  // Calcula aproximadamente quantas palavras cabem por linha
+  // baseado no tamanho médio das palavras e largura da tela
+  let wordsPerLine;
+
+  if (screenWidth <= 375) {
+    wordsPerLine = 8; // Mobile pequeno
+  } else if (screenWidth <= 767) {
+    wordsPerLine = 10; // Mobile
+  } else if (screenWidth <= 1024) {
+    wordsPerLine = 14; // Tablet
+  } else if (screenWidth <= 1279) {
+    wordsPerLine = 18; // Desktop médio
+  } else {
+    wordsPerLine = 22; // Desktop grande
+  }
+
+  // Calcula linha central (40% da tela verticalmente)
+  const targetLine = Math.floor((totalWords / wordsPerLine) * 0.4);
+
+  // Posiciona no início da linha central, mas com margem de segurança
+  // Adiciona 2 palavras de margem da esquerda para garantir visibilidade
+  const startPosition = targetLine * wordsPerLine + 2;
+
+  // Garante que não ultrapasse o total de palavras disponíveis
+  return Math.min(startPosition, totalWords - 10);
+}
+
 // Detecta idioma do navegador
 function detectLanguage() {
   const browserLang = navigator.language || navigator.userLanguage;
@@ -238,15 +290,21 @@ function generateWords(lang) {
 
   const dimWords = lang === "pt" ? dimWordsPT : dimWordsEN;
   const highlights = highlightWords[lang];
-  const totalWords = 150;
-  const highlightPositions = [75, 76, 77, 78, 79];
+  const totalWords = calculateTotalWords();
+
+  // Calcula posição segura para as palavras destacadas
+  const highlightStartPosition = calculateSafeHighlightPosition(totalWords);
 
   for (let i = 0; i < totalWords; i++) {
     const span = document.createElement("span");
     span.className = "word";
 
-    if (highlightPositions.includes(i)) {
-      const highlightIndex = highlightPositions.indexOf(i);
+    // Verifica se está na sequência de palavras destacadas (5 palavras seguidas)
+    if (
+      i >= highlightStartPosition &&
+      i < highlightStartPosition + highlights.length
+    ) {
+      const highlightIndex = i - highlightStartPosition;
       span.textContent = highlights[highlightIndex] + ".";
       span.classList.add("highlight");
       span.addEventListener("click", hideIntro);
@@ -361,6 +419,15 @@ document.addEventListener("keydown", hideIntro, { once: true });
 // Listener global para touchend (garante que isTouching seja resetado)
 document.addEventListener("touchend", function () {
   isTouching = false;
+});
+
+// Regenera palavras ao redimensionar a janela
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    generateWords(currentLang);
+  }, 250);
 });
 
 // Inicializa

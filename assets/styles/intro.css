@@ -59,6 +59,8 @@ body.intro-hidden {
   z-index: 999;
   transition: opacity 0.8s;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .intro.fade-out {
@@ -66,30 +68,35 @@ body.intro-hidden {
   pointer-events: none;
 }
 
-/* Grid de palavras - centralizado */
+/* Grid de palavras - expandindo além da viewport para cortar nas bordas */
 .words-grid {
-  width: 100%;
-  height: 100%;
+  width: calc(100vw + 20rem);
+  height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  align-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 0.5rem 0.5rem;
   line-height: 1;
-  padding: 0.5rem;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  left: -2rem;
 }
 
 /* Palavras */
 .word {
-  font-size: 14px;
+  font-size: clamp(14px, 2vw, 18px);
   font-weight: 400;
   letter-spacing: 0.05em;
   opacity: 0;
   animation: fadeIn 4s forwards;
   transition: all 0.3s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Palavras apagadas */
@@ -151,7 +158,72 @@ body.intro-hidden .portfolio {
   font-size: 14px;
 }
 
-/* Desktop */
+/* Responsive - Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .words-grid {
+    width: calc(100vw + 15rem);
+    gap: 0.6rem 0.6rem;
+    left: -1.5rem;
+  }
+
+  .word {
+    font-size: clamp(16px, 2.2vw, 20px);
+  }
+}
+
+/* Responsive - Mobile (até 767px) */
+@media (max-width: 767px) {
+  .lang-selector {
+    top: 1rem;
+    right: 1rem;
+    font-size: 9px;
+  }
+
+  .words-grid {
+    width: calc(100vw + 10rem);
+    gap: 0.4rem 0.4rem;
+    left: -1rem;
+  }
+
+  .word {
+    font-size: clamp(12px, 3vw, 16px);
+  }
+}
+
+/* Mobile muito pequeno (até 375px) */
+@media (max-width: 375px) {
+  .lang-selector {
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 8px;
+    gap: 0.3rem;
+  }
+
+  .words-grid {
+    width: calc(100vw + 8rem);
+    gap: 0.3rem 0.3rem;
+    left: -0.75rem;
+  }
+
+  .word {
+    font-size: clamp(10px, 3.5vw, 14px);
+  }
+}
+
+/* Desktop médio (1024px - 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .words-grid {
+    width: calc(100vw + 18rem);
+    gap: 0.65rem 0.65rem;
+    left: -1.75rem;
+  }
+
+  .word {
+    font-size: clamp(15px, 2vw, 19px);
+  }
+}
+
+/* Desktop grande (1280px+) */
 @media (min-width: 1280px) {
   .lang-selector {
     top: 2rem;
@@ -160,12 +232,38 @@ body.intro-hidden .portfolio {
   }
 
   .words-grid {
-    gap: 0.5rem;
-    line-height: 1.1;
-    padding: 1rem;
+    width: calc(100vw + 25rem);
+    gap: 0.7rem 0.7rem;
+    left: -2.5rem;
   }
 
   .word {
-    font-size: 16px;
+    font-size: clamp(16px, 1.8vw, 20px);
+  }
+}
+
+/* Desktop extra grande (1440px+) */
+@media (min-width: 1440px) {
+  .words-grid {
+    width: calc(100vw + 30rem);
+    gap: 0.75rem 0.75rem;
+    left: -3rem;
+  }
+
+  .word {
+    font-size: clamp(17px, 1.7vw, 21px);
+  }
+}
+
+/* Ultra wide (1920px+) */
+@media (min-width: 1920px) {
+  .words-grid {
+    width: calc(100vw + 40rem);
+    gap: 0.8rem 0.8rem;
+    left: -4rem;
+  }
+
+  .word {
+    font-size: clamp(18px, 1.6vw, 22px);
   }
 }
