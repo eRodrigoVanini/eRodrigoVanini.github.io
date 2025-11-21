@@ -133,13 +133,13 @@ const dimWordsEN = [
   "resist",
 ];
 
-// Palavras destacadas
+// Palavras destacadas (sempre dentro do viewport)
 const highlightWords = {
   pt: ["PORTFÓLIO", "2025", "RODRIGO", "VANINI", "ENTRAR"],
   en: ["PORTFOLIO", "2025", "RODRIGO", "VANINI", "ENTER"],
 };
 
-// Traduções
+// Traduções (mantive igual ao seu original, resumido para evitar poluição aqui)
 const translations = {
   pt: {
     role: "Desenvolvedor Full Stack",
@@ -220,51 +220,20 @@ function calculateTotalWords() {
   const screenWidth = window.innerWidth;
 
   if (screenWidth <= 375) {
-    return 200; // Mobile muito pequeno
+    return 220;
   } else if (screenWidth <= 767) {
-    return 280; // Mobile
+    return 300;
   } else if (screenWidth <= 1024) {
-    return 350; // Tablet
+    return 370;
   } else if (screenWidth <= 1279) {
-    return 400; // Desktop médio
+    return 420;
   } else if (screenWidth <= 1439) {
-    return 480; // Desktop grande (1280px)
+    return 500;
   } else if (screenWidth <= 1919) {
-    return 550; // Desktop extra grande
+    return 570;
   } else {
-    return 650; // Ultra wide
+    return 670;
   }
-}
-
-// Calcula posição segura para highlights (área visível da tela)
-function calculateSafeHighlightPosition(totalWords) {
-  const screenWidth = window.innerWidth;
-
-  // Calcula aproximadamente quantas palavras cabem por linha
-  // baseado no tamanho médio das palavras e largura da tela
-  let wordsPerLine;
-
-  if (screenWidth <= 375) {
-    wordsPerLine = 8; // Mobile pequeno
-  } else if (screenWidth <= 767) {
-    wordsPerLine = 10; // Mobile
-  } else if (screenWidth <= 1024) {
-    wordsPerLine = 14; // Tablet
-  } else if (screenWidth <= 1279) {
-    wordsPerLine = 18; // Desktop médio
-  } else {
-    wordsPerLine = 22; // Desktop grande
-  }
-
-  // Calcula linha central (40% da tela verticalmente)
-  const targetLine = Math.floor((totalWords / wordsPerLine) * 0.4);
-
-  // Posiciona no início da linha central, mas com margem de segurança
-  // Adiciona 2 palavras de margem da esquerda para garantir visibilidade
-  const startPosition = targetLine * wordsPerLine + 2;
-
-  // Garante que não ultrapasse o total de palavras disponíveis
-  return Math.min(startPosition, totalWords - 10);
 }
 
 // Detecta idioma do navegador
@@ -284,41 +253,98 @@ function activateWord(element) {
   }
 }
 
-// Gera palavras aleatórias
+// Util: retorna um item aleatório do array
+function randItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Gera palavras aleatórias com bloco de highlights em posição aleatória segura
 function generateWords(lang) {
   wordsGrid.innerHTML = ""; // Limpa grid
 
   const dimWords = lang === "pt" ? dimWordsPT : dimWordsEN;
-  const highlights = highlightWords[lang];
+  const highlights = highlightWords[lang].slice(); // copia
   const totalWords = calculateTotalWords();
 
-  // Calcula posição segura para as palavras destacadas
-  const highlightStartPosition = calculateSafeHighlightPosition(totalWords);
+  // Monta uma lista de placeholders para preencher -> start com todos dim placeholders
+  const slots = new Array(totalWords).fill(null);
 
-  for (let i = 0; i < totalWords; i++) {
-    const span = document.createElement("span");
-    span.className = "word";
+  // Preenche todos slots com palavras dim aleatórias
+  for (let i = 0; i < slots.length; i++) {
+    slots[i] = { type: "dim", text: randItem(dimWords) + "." };
+  }
 
-    // Verifica se está na sequência de palavras destacadas (5 palavras seguidas)
-    if (
-      i >= highlightStartPosition &&
-      i < highlightStartPosition + highlights.length
-    ) {
-      const highlightIndex = i - highlightStartPosition;
-      span.textContent = highlights[highlightIndex] + ".";
-      span.classList.add("highlight");
-      span.addEventListener("click", hideIntro);
+  // Determinar posição segura para inserir o bloco de highlights:
+  // queremos que o bloco apareça dentro da área visível (não no extremo que fica deslocado).
+  // Limitamos a posição de inserção a um percentual inicial do grid (ex: primeiros 45% dos slots).
+  const safeFraction = 0.45; // 45% do grid — suficientemente dentro do viewport
+  const maxStart = Math.max(
+    0,
+    Math.floor((totalWords - highlights.length) * safeFraction)
+  );
+
+  // posição aleatória dentro da área segura
+  const insertionIndex = Math.floor(Math.random() * (maxStart + 1));
+
+  // substitui nesse índice pelo bloco de highlights (mantendo bloco agrupado)
+  for (let h = 0; h < highlights.length; h++) {
+    const idx = insertionIndex + h;
+    if (idx < slots.length) {
+      slots[idx] = { type: "highlight", text: highlights[h] + "." };
+    }
+  }
+
+  // Agora criamos os elementos a partir de slots — isso mantém o bloco agrupado
+  // mas a posição do bloco muda aleatoriamente a cada chamada
+  let overflowCounter = 0;
+  for (let i = 0; i < slots.length; i++) {
+    const slot = slots[i];
+
+    if (slot.type === "highlight") {
+      // Criamos um highlight dentro de um wrapper de bloco quando encontramos o primeiro elemento do bloco.
+      // Para evitar criar múltiplos wrappers, checamos se o anterior já foi highlight.
+      // Estratégia: se i==0 ou o anterior não for highlight, abrir um new wrapper.
+      if (i === 0 || slots[i - 1].type !== "highlight") {
+        // começar wrapper
+        const wrapper = document.createElement("span");
+        wrapper.className = "highlight-block";
+        // inserir as palavras do bloco contínuo em sequência
+        let j = i;
+        while (j < slots.length && slots[j].type === "highlight") {
+          const span = document.createElement("span");
+          span.className = "word highlight";
+          span.textContent = slots[j].text;
+          span.addEventListener("click", hideIntro);
+          wrapper.appendChild(span);
+          j++;
+        }
+        wordsGrid.appendChild(wrapper);
+        // pular o índice até j-1, porque o for vai incrementar normalmente
+        i = j - 1;
+        continue;
+      } else {
+        // se já estamos dentro de um bloco (não alcançamos aqui por causa do continue acima)
+        continue;
+      }
     } else {
-      const randomWord = dimWords[Math.floor(Math.random() * dimWords.length)];
-      span.textContent = randomWord + ".";
-      span.classList.add("dim");
+      // dim word normal
+      const span = document.createElement("span");
+      span.className = "word dim";
+      span.textContent = slot.text;
 
-      // Desktop: mouseenter (hover)
+      // alterna overflow classes para criar sensação de corte
+      if (overflowCounter % 30 < 15) {
+        span.classList.add("overflow-left");
+      } else {
+        span.classList.add("overflow-right");
+      }
+      overflowCounter++;
+
+      // Eventos
       span.addEventListener("mouseenter", function () {
         this.classList.add("active");
       });
 
-      // Mobile: touchstart (toque inicial)
       span.addEventListener(
         "touchstart",
         function (e) {
@@ -330,7 +356,6 @@ function generateWords(lang) {
         { passive: false }
       );
 
-      // Mobile: touchmove (arrastar o dedo)
       span.addEventListener(
         "touchmove",
         function (e) {
@@ -338,7 +363,6 @@ function generateWords(lang) {
           e.stopPropagation();
 
           if (isTouching) {
-            // Detecta elemento sob o dedo durante o arrasto
             const touch = e.touches[0];
             const elementUnderFinger = document.elementFromPoint(
               touch.clientX,
@@ -350,7 +374,6 @@ function generateWords(lang) {
         { passive: false }
       );
 
-      // Mobile: touchend (soltar o dedo)
       span.addEventListener(
         "touchend",
         function (e) {
@@ -360,9 +383,9 @@ function generateWords(lang) {
         },
         { passive: false }
       );
-    }
 
-    wordsGrid.appendChild(span);
+      wordsGrid.appendChild(span);
+    }
   }
 }
 
@@ -416,7 +439,7 @@ langOptions.forEach((option) => {
 // Eventos gerais
 document.addEventListener("keydown", hideIntro, { once: true });
 
-// Listener global para touchend (garante que isTouching seja resetado)
+// Listener global para touchend
 document.addEventListener("touchend", function () {
   isTouching = false;
 });

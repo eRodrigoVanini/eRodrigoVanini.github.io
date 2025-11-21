@@ -68,9 +68,9 @@ body.intro-hidden {
   pointer-events: none;
 }
 
-/* Grid de palavras - expandindo além da viewport para cortar nas bordas */
+/* GRID com overflow das dimWords (mantido) */
 .words-grid {
-  width: calc(100vw + 20rem);
+  width: calc(100vw + 20rem); /* mantém dimWords ultrapassando tela */
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
@@ -79,15 +79,14 @@ body.intro-hidden {
   align-content: flex-start;
   gap: 0.5rem 0.5rem;
   line-height: 1;
-  margin: 0;
-  padding: 0;
+  padding: 0 2rem;
   overflow: visible;
   position: absolute;
   top: 0;
-  left: -2rem;
+  left: -2rem; /* necessário para efeito de overflow */
 }
 
-/* Palavras */
+/* Palavras (padrão) */
 .word {
   font-size: clamp(14px, 2vw, 18px);
   font-weight: 400;
@@ -95,11 +94,11 @@ body.intro-hidden {
   opacity: 0;
   animation: fadeIn 4s forwards;
   transition: all 0.3s ease;
-  white-space: nowrap;
+  white-space: nowrap; /* dimWords podem ser cortadas */
   flex-shrink: 0;
 }
 
-/* Palavras apagadas */
+/* dimWords */
 .word.dim {
   color: #333;
   cursor: pointer;
@@ -107,19 +106,38 @@ body.intro-hidden {
   user-select: none;
 }
 
-/* Estado ativo (quando passou o mouse OU tocou) */
 .word.dim.active {
   color: rgb(211, 94, 94);
   font-weight: 700;
   transition: all 0.2s ease;
 }
 
-/* Palavras destacadas */
+/* Bloco de highlights — wrapper */
+.highlight-block {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  flex-wrap: wrap; /* se necessário quebra interna do bloco */
+  /* proteção para não sair do viewport mesmo com grid deslocado */
+  max-width: calc(100vw - 6rem);
+  z-index: 20;
+  /* evitar que o bloco seja encolhido demais */
+  flex-shrink: 0;
+}
+
+/* Palavras destacadas individuais */
 .word.highlight {
   color: #fff;
   font-weight: 700;
+  white-space: normal !important; /* permite quebra */
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  /* permitir que a palavra quebre em várias linhas caso seja longa */
+  display: inline-block;
+  max-width: 100%;
 }
 
+/* hover */
 .word.highlight:hover {
   color: #ddd;
   cursor: pointer;
@@ -142,28 +160,13 @@ body.intro-hidden .portfolio {
   opacity: 1;
 }
 
-.hero {
-  padding: 4rem 1.5rem;
-  max-width: 960px;
-}
-
-.hero h2 {
-  font-size: 2rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  color: #666;
-  font-size: 14px;
-}
-
-/* Responsive - Tablet (768px - 1024px) */
+/* Responsividade */
 @media (min-width: 768px) and (max-width: 1024px) {
   .words-grid {
     width: calc(100vw + 15rem);
-    gap: 0.6rem 0.6rem;
     left: -1.5rem;
+    padding: 0 1.5rem;
+    gap: 0.6rem 0.6rem;
   }
 
   .word {
@@ -171,7 +174,6 @@ body.intro-hidden .portfolio {
   }
 }
 
-/* Responsive - Mobile (até 767px) */
 @media (max-width: 767px) {
   .lang-selector {
     top: 1rem;
@@ -181,41 +183,43 @@ body.intro-hidden .portfolio {
 
   .words-grid {
     width: calc(100vw + 10rem);
-    gap: 0.4rem 0.4rem;
     left: -1rem;
+    padding: 0 1rem;
+    gap: 0.4rem 0.4rem;
   }
 
   .word {
     font-size: clamp(12px, 3vw, 16px);
   }
+
+  .highlight-block {
+    max-width: calc(100vw - 3rem);
+  }
 }
 
-/* Mobile muito pequeno (até 375px) */
 @media (max-width: 375px) {
-  .lang-selector {
-    top: 0.75rem;
-    right: 0.75rem;
-    font-size: 8px;
-    gap: 0.3rem;
-  }
-
   .words-grid {
     width: calc(100vw + 8rem);
-    gap: 0.3rem 0.3rem;
     left: -0.75rem;
+    padding: 0 0.75rem;
+    gap: 0.3rem 0.3rem;
   }
 
   .word {
     font-size: clamp(10px, 3.5vw, 14px);
   }
+
+  .highlight-block {
+    max-width: calc(100vw - 2rem);
+  }
 }
 
-/* Desktop médio (1024px - 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .words-grid {
     width: calc(100vw + 18rem);
-    gap: 0.65rem 0.65rem;
     left: -1.75rem;
+    padding: 0 1.75rem;
+    gap: 0.65rem 0.65rem;
   }
 
   .word {
@@ -223,18 +227,12 @@ body.intro-hidden .portfolio {
   }
 }
 
-/* Desktop grande (1280px+) */
 @media (min-width: 1280px) {
-  .lang-selector {
-    top: 2rem;
-    right: 2rem;
-    font-size: 11px;
-  }
-
   .words-grid {
     width: calc(100vw + 25rem);
-    gap: 0.7rem 0.7rem;
     left: -2.5rem;
+    padding: 0 2.5rem;
+    gap: 0.7rem 0.7rem;
   }
 
   .word {
@@ -242,12 +240,12 @@ body.intro-hidden .portfolio {
   }
 }
 
-/* Desktop extra grande (1440px+) */
 @media (min-width: 1440px) {
   .words-grid {
     width: calc(100vw + 30rem);
-    gap: 0.75rem 0.75rem;
     left: -3rem;
+    padding: 0 3rem;
+    gap: 0.75rem 0.75rem;
   }
 
   .word {
@@ -255,12 +253,12 @@ body.intro-hidden .portfolio {
   }
 }
 
-/* Ultra wide (1920px+) */
 @media (min-width: 1920px) {
   .words-grid {
     width: calc(100vw + 40rem);
-    gap: 0.8rem 0.8rem;
     left: -4rem;
+    padding: 0 4rem;
+    gap: 0.8rem 0.8rem;
   }
 
   .word {
