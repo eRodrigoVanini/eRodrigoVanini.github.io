@@ -1,0 +1,12 @@
+.profile-image {
+  border: 0.3rem solid #f6f3ed;
+  border-radius: 50%;
+
+  width: 30rem;
+  height: 30rem;
+  object-fit: cover;
+  display: flex;
+
+  margin-inline: auto;
+  padding: 2rem;
+}

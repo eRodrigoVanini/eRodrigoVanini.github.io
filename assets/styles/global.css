@@ -9,6 +9,8 @@
   --font-family: "Geologica", sans-serif;
 
   --title-lg: var(--font-family);
+
+  --background-color: #313851;
 }
 
 html {
@@ -17,11 +19,9 @@ html {
 
 body {
   font: 1rem var(--title-lg);
-  background: #000;
+  background: var(--background-color);
   color: #fff;
   overflow: hidden;
 }
 
-body.intro-hidden {
-  overflow: auto;
-}
+
