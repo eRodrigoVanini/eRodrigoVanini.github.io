@@ -166,20 +166,9 @@ function randItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const INTRO_KEY = "rv_intro_seen_v1";
-function shouldSkipIntro() {
-  return localStorage.getItem(INTRO_KEY) === "true";
-}
-function markIntroSeen() {
-  try {
-    localStorage.setItem(INTRO_KEY, "true");
-  } catch (e) {}
-}
-
 function hideIntro(fast = false) {
   intro.classList.add("fade-out");
   document.body.classList.add("intro-hidden");
-  markIntroSeen();
   setTimeout(() => intro.remove(), fast ? 350 : 500);
 }
 
@@ -324,12 +313,10 @@ window.addEventListener("resize", () => {
   resizeTimeout = setTimeout(() => generateWords(currentLang), 300);
 });
 
-currentLang = detectLanguage();
+// ===============================
+// INTRO ALWAYS SHOWS
+// ===============================
 
-if (shouldSkipIntro()) {
-  document.body.classList.add("intro-hidden");
-  setTimeout(() => intro.remove(), 120);
-} else {
-  switchLanguage(currentLang);
-  setTimeout(() => hideIntro(), 4500);
-}
+currentLang = detectLanguage();
+switchLanguage(currentLang);
+setTimeout(() => hideIntro(), 4500);

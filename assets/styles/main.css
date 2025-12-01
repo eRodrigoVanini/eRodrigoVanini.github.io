@@ -24,7 +24,6 @@
 /* Foto */
 .sidebar-photo {
   width: 100%;
-  aspect-ratio: 1;
   border: 1px solid #333;
   overflow: hidden;
   border-radius: 4px;
@@ -50,14 +49,11 @@
 }
 
 .sidebar-name {
-  font-size: 16px;
-  font-weight: 700;
   color: #fff;
   letter-spacing: 0.05em;
 }
 
 .sidebar-title {
-  font-size: 12px;
   color: #666;
   letter-spacing: 0.05em;
 }
@@ -77,7 +73,7 @@
   align-items: center;
   color: #666;
   text-decoration: none;
-  font-size: 12px;
+
   letter-spacing: 0.05em;
   transition: color 0.3s ease;
 }
@@ -103,7 +99,7 @@
   color: #666;
   text-decoration: none;
   text-align: center;
-  font-size: 11px;
+
   letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: all 0.3s ease;
@@ -130,8 +126,6 @@
 }
 
 .section-title {
-  font-size: 12px;
-  font-weight: 700;
   color: #666;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -157,7 +151,6 @@
 }
 
 .section-content p {
-  font-size: 16px;
   line-height: 1.8;
   color: #ccc;
   letter-spacing: 0.02em;
@@ -183,13 +176,11 @@
 }
 
 .skill-name {
-  font-size: 14px;
   color: #fff;
   letter-spacing: 0.05em;
 }
 
 .skill-level {
-  font-size: 11px;
   color: #666;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -219,7 +210,8 @@
 /* Card de Projeto */
 .project-card {
   border: 1px solid #222;
-  transition: border-color 0.3s ease;
+  border-radius: 0.5rem;
+  transition:  0.3s ease;
   overflow: hidden;
 }
 
@@ -237,8 +229,7 @@
 .project-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%);
+  object-fit: fill;
   transition: all 0.5s ease;
 }
 
@@ -255,20 +246,16 @@
 }
 
 .project-title {
-  font-size: 18px;
-  font-weight: 700;
   color: #fff;
   letter-spacing: 0.02em;
 }
 
 .project-year {
-  font-size: 11px;
   color: #666;
   letter-spacing: 0.1em;
 }
 
 .project-description {
-  font-size: 14px;
   line-height: 1.6;
   color: #999;
   margin: 0 1.5rem 1.5rem;
@@ -283,7 +270,6 @@
 }
 
 .tag {
-  font-size: 10px;
   color: #666;
   border: 1px solid #333;
   padding: 0.25rem 0.75rem;
@@ -305,7 +291,7 @@
   gap: 0.5rem;
   color: #666;
   text-decoration: none;
-  font-size: 11px;
+
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
   padding: 0.75rem 1rem;
@@ -324,7 +310,6 @@
   background: #fff;
   color: #000;
   border-color: #fff;
-  font-weight: 600;
 }
 
 .project-link-demo:hover {
@@ -358,7 +343,7 @@
   gap: 0.75rem;
   color: #666;
   text-decoration: none;
-  font-size: 14px;
+
   letter-spacing: 0.05em;
   padding: 1rem 2rem;
   border: 1px solid #333;
@@ -388,7 +373,6 @@
 }
 
 .contact-content p {
-  font-size: 16px;
   line-height: 1.8;
   color: #ccc;
 }
@@ -414,18 +398,15 @@
 }
 
 .contact-icon {
-  font-size: 24px;
 }
 
 .contact-label {
-  font-size: 11px;
   color: #666;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .contact-value {
-  font-size: 14px;
   color: #fff;
   letter-spacing: 0.02em;
 }
@@ -439,7 +420,6 @@
 }
 
 .footer p {
-  font-size: 12px;
   color: #666;
   letter-spacing: 0.05em;
 }
@@ -452,11 +432,9 @@
   }
 
   .sidebar-name {
-    font-size: 14px;
   }
 
   .sidebar-title {
-    font-size: 11px;
   }
 
   .content {
@@ -468,21 +446,18 @@
   }
 
   .section-title {
-    font-size: 11px;
+    font: var(--title-lg);
     margin-bottom: 1.5rem;
   }
 
   .section-content p {
-    font-size: 14px;
     line-height: 1.7;
   }
 
   .skill-name {
-    font-size: 13px;
   }
 
   .skill-level {
-    font-size: 10px;
   }
 
   .project-image {
@@ -490,15 +465,12 @@
   }
 
   .project-title {
-    font-size: 16px;
   }
 
   .project-description {
-    font-size: 13px;
   }
 
   .project-link {
-    font-size: 10px;
     padding: 0.65rem 0.75rem;
   }
 
@@ -507,11 +479,9 @@
   }
 
   .contact-icon {
-    font-size: 20px;
   }
 
   .contact-value {
-    font-size: 13px;
   }
 }
 
@@ -542,19 +512,15 @@
   }
 
   .sidebar-name {
-    font-size: 18px;
   }
 
   .sidebar-title {
-    font-size: 13px;
   }
 
   .social-link {
-    font-size: 13px;
   }
 
   .sidebar-cv {
-    font-size: 12px;
     padding: 0.85rem 1.25rem;
   }
 
@@ -570,12 +536,10 @@
   }
 
   .section-title {
-    font-size: 13px;
     margin-bottom: 2.5rem;
   }
 
   .section-content p {
-    font-size: 17px;
     line-height: 1.9;
   }
 
@@ -585,11 +549,9 @@
   }
 
   .skill-name {
-    font-size: 15px;
   }
 
   .skill-level {
-    font-size: 12px;
   }
 
   .projects-grid {
@@ -602,15 +564,12 @@
   }
 
   .project-title {
-    font-size: 19px;
   }
 
   .project-description {
-    font-size: 15px;
   }
 
   .project-link {
-    font-size: 12px;
     padding: 0.85rem 1.25rem;
   }
 
@@ -624,24 +583,19 @@
   }
 
   .contact-icon {
-    font-size: 28px;
   }
 
   .contact-label {
-    font-size: 12px;
   }
 
   .contact-value {
-    font-size: 15px;
   }
 
   .github-link {
-    font-size: 15px;
     padding: 1.25rem 2.5rem;
   }
 
   .footer p {
-    font-size: 13px;
   }
 }
 
@@ -652,13 +606,12 @@
   }
 
   .section-content p {
-    font-size: 18px;
     line-height: 2;
   }
 }
 
 /* Responsive - Mobile (até 768px) */
-@media (max-width: 768px) {
+@media (max-width: 375px) {
   .sidebar {
     position: relative;
     width: 100%;
